@@ -1,4 +1,5 @@
-Summary:	A library to aid daemonizing ruby programs
+Summary:	A library to aid daemonizing Ruby programs
+Summary(pl.UTF-8):	Biblioteka pomagająca w demonizacji programów w Rubym
 Name:		ruby-daemons
 Version:	1.0.7
 Release:	1
@@ -13,22 +14,38 @@ BuildRequires:	setup.rb = 3.3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Daemons provides an easy way to wrap existing ruby scripts (for
+Daemons provides an easy way to wrap existing Ruby scripts (for
 example a self-written server) to be run as a daemon and to be
 controlled by simple start/stop/restart commands.
 
-If you want, you can also use daemons to run blocks of ruby code in a
+If you want, you can also use daemons to run blocks of Ruby code in a
 daemon process and to control these processes from the main
 application.
 
 Besides this basic functionality, daemons offers many advanced
-features like exception backtracing and logging (in case your ruby
+features like exception backtracing and logging (in case your Ruby
 script crashes) and monitoring and automatic restarting of your
 processes if they crash.
 
 Daemons includes the daemonize.rb script written by Travis Whitton to
 do the daemonization process.
 
+%description -l pl.UTF-8
+daemons udostępnia prosty sposób obudowywania istniejących skryptów w
+Rubym (na przykład samodzielne napisanego serwera) w celu uruchamiania
+jako demon i sterowania przez proste polecenia start/stop/restart.
+
+Jeśli chcemy, możemy także użyć daemons do uruchamiania bloków kodu w
+Rubym jako procesu demona i sterować tymi procesami z głównej
+aplikacji.
+
+Poza tą podstawową funkcjonalnością daemons oferuje także wiele
+zaawansowanych możliwości, takich jak ślady wyjątków oraz logowanie (w
+przypadku padu skryptu), monitorowanie i automatyczne restartowanie
+procesów.
+
+daemons zawiera skrypt daemonize.rb napisany przez Travisa Whittona,
+wykonujący proces demonizacji.
 
 %prep
 %setup -q -c
