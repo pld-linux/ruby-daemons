@@ -1,12 +1,12 @@
 Summary:	A library to aid daemonizing Ruby programs
 Summary(pl.UTF-8):	Biblioteka pomagająca w demonizacji programów w Rubym
 Name:		ruby-daemons
-Version:	1.0.7
+Version:	1.0.10
 Release:	1
 License:	Ruby's
 Group:		Development/Languages
 Source0:	http://gems.rubyforge.org/gems/daemons-%{version}.gem
-# Source0-md5:	33d0e02514281f7f29b19a594382fc61
+# Source0-md5:	8e2fc7de08405b2d27ac96c82602c9ce
 #Patch0: %{name}-nogems.patch
 URL:		http://daemons.rubyforge.org
 BuildRequires:	rpmbuild(macros) >= 1.277
