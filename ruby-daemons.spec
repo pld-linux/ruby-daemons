@@ -10,7 +10,7 @@ Source0:	http://gems.rubyforge.org/gems/daemons-%{version}.gem
 #Patch0: %{name}-nogems.patch
 URL:		http://daemons.rubyforge.org
 BuildRequires:	rpmbuild(macros) >= 1.277
-BuildRequires:	setup.rb = 3.3.1
+BuildRequires:	setup.rb >= 3.3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
