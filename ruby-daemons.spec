@@ -1,16 +1,17 @@
+%define pkgname daemons
 Summary:	A library to aid daemonizing Ruby programs
 Summary(pl.UTF-8):	Biblioteka pomagająca w demonizacji programów w Rubym
-Name:		ruby-daemons
+Name:		ruby-%{pkgname}
 Version:	1.0.10
 Release:	1
 License:	Ruby's
 Group:		Development/Languages
 Source0:	http://gems.rubyforge.org/gems/daemons-%{version}.gem
 # Source0-md5:	8e2fc7de08405b2d27ac96c82602c9ce
-#Patch0: %{name}-nogems.patch
 URL:		http://daemons.rubyforge.org
-BuildRequires:	rpmbuild(macros) >= 1.277
-BuildRequires:	setup.rb >= 3.3.1
+BuildRequires:	rpm-rubyprov
+BuildRequires:	rpmbuild(macros) >= 1.656
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,38 +48,59 @@ procesów.
 daemons zawiera skrypt daemonize.rb napisany przez Travisa Whittona,
 wykonujący proces demonizacji.
 
+%package rdoc
+Summary:	HTML documentation for %{pkgname}
+Summary(pl.UTF-8):	Dokumentacja w formacie HTML dla %{pkgname}
+Group:		Documentation
+Requires:	ruby >= 1:1.8.7-4
+
+%description rdoc
+HTML documentation for %{pkgname}.
+
+%description rdoc -l pl.UTF-8
+Dokumentacja w formacie HTML dla %{pkgname}.
+
+%package ri
+Summary:	ri documentation for %{pkgname}
+Summary(pl.UTF-8):	Dokumentacja w formacie ri dla %{pkgname}
+Group:		Documentation
+Requires:	ruby
+
+%description ri
+ri documentation for %{pkgname}.
+
+%description ri -l pl.UTF-8
+Dokumentacji w formacie ri dla %{pkgname}.
+
 %prep
-%setup -q -c
-tar xf %{SOURCE0} -O data.tar.gz | tar xzv-
-#%patch0 -p1
-cp %{_datadir}/setup.rb .
+%setup -q -n %{pkgname}-%{version}
 
 %build
-ruby setup.rb config \
-	--rbdir=%{ruby_rubylibdir} \
-	--sodir=%{ruby_archdir}
-
-ruby setup.rb setup
-
 rdoc --op rdoc lib
 rdoc --ri --op ri lib
+rm ri/cache.ri
+rm ri/created.rid
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{ruby_archdir},%{ruby_ridir}}
-
-ruby setup.rb install \
-	--prefix=$RPM_BUILD_ROOT
-
+install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_ridir},%{ruby_rdocdir}/%{name}-%{version}}
+cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
+cp -a rdoc/* $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc rdoc
-%{ruby_rubylibdir}/daemons.rb
-%{ruby_rubylibdir}/daemons
+%{ruby_vendorlibdir}/daemons.rb
+%{ruby_vendorlibdir}/daemons
+
+%files rdoc
+%defattr(644,root,root,755)
+%{ruby_rdocdir}/%{name}-%{version}
+
+%files ri
+%defattr(644,root,root,755)
 %{ruby_ridir}/Daemonize
 %{ruby_ridir}/Daemons
